@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+		<local-config-repository>G:\study\java-spring\udemy-course\course-src\microservices\</local-config-repository>
 	</properties>
 
 	<dependencies>
