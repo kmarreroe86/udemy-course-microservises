@@ -11,6 +11,3 @@ public class LimitsServiceApplication {
 	}
 
 }
-
-
-// https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/learn/lecture/24347024#overview

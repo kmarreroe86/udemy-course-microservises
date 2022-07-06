@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  currency-exchange-service:
+    image: kmarrero/mm2-currency-exchange-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka
+      EUREKA.CLIENT.FETCHREGISTRY: "true"
+      
+  currency-conversion-service:
+    image: kmarrero/mm2-currency-conversion-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka
+      EUREKA.CLIENT.FETCHREGISTRY: "true"
+      
+  api-gateway:
+    image: kmarrero/mm2-api-gateway:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-service
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8761/eureka     
+
+  naming-service:
+    image: kmarrero/mm2-naming-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
+
+networks:
+  currency-network:
